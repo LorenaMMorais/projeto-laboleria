@@ -1,0 +1,34 @@
+{
+  "name": "projeto-laboleria",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx nodemon ./src/index.js",
+    "start": "node ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LorenaMMorais/projeto-laboleria.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LorenaMMorais/projeto-laboleria/issues"
+  },
+  "homepage": "https://github.com/LorenaMMorais/projeto-laboleria#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "fs": "0.0.1-security",
+    "joi": "^17.9.1",
+    "node": "^19.8.1",
+    "nodemon": "^2.0.21",
+    "pg": "^8.10.0",
+    "uuid": "^9.0.0"
+  }
+}
