@@ -1,6 +1,9 @@
 import { Router } from "express";
-import { postClients } from "../controllers/clientsController.js";
+import { getClientsOrder, postClients } from "../controllers/clientsController.js";
 
-export const clientsRoute = Router();
+const clientsRoute = Router();
 
 clientsRoute.post("/clients", postClients);
+clientsRoute.get("/clients/:id/orders", getClientsOrder);
+
+export default clientsRoute;
