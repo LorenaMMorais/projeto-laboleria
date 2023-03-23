@@ -37,7 +37,16 @@ export async function postOrder(req, res){
 }
 
 export async function getOrders(req, res){
+    try {
+        const allOrders = await db.query(`SELECT * FROM orders;`);
 
+        if(!allOrders.rows[0]) return res.status(400).send([]);
+
+        return res.status(200).send(allOrders.rows);
+    }catch(error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
 }
 
 export async function getOrdersById(req, res){
