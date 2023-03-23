@@ -1,4 +1,5 @@
 import db from "../db.js";
+import clientsSchema from "../schemas/clientsSchema.js";
 
 export async function postClients(req, res){
     const { name, address, phone } = req.body;
