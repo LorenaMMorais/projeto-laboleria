@@ -1,4 +1,3 @@
-import joi from "joi";
 import db from "../db.js";
 import dayjs from "dayjs";
 import ordersSchema from "../schemas/ordersSchema.js";
@@ -50,5 +49,39 @@ export async function getOrders(req, res){
 }
 
 export async function getOrdersById(req, res){
+    const { id } = req.params;
+    
+    try {
+        const ordersById = await db.query(`SELECT * FROM orders WHERE id = $1;`, [Id]);
 
+        if(!ordersById.rows[0]) return res.sendStatus(404);
+
+        const clientOrderId = await db.query(`SELECT * FROM clients WHERE id = $1;`, [ordersById.rows[0].clientId]);
+    
+        const cakeOrderId = await db.query(`SELECT * FROM cakes WHERE id = $1;`, [ordersById.rows[0].cakeId]);
+
+        const ordersData = {
+            client:{
+                id: clientOrderId.rows[0].id,
+                name: clientOrderId.rows[0].name,
+                address: clientOrderId.rows[0].address,
+                phone: clientOrderId.rows[0].phone
+            },
+            cake:{
+                id: cakeOrderId.rows[0].id,
+                name: cakeOrderId.rows[0].name,
+                price: cakeOrderId.rows[0].price,
+                image: cakeOrderId.rows[0].image,
+                description: cakeOrderId.rows[0].description
+            },
+            orderId: orderById.rows[0].id,
+            createdAt: orderById.rows[0].createdAt,
+            quantity: orderById.rows[0].quantity,
+            totalPrice: orderById.rows[0].totalPrice
+        }
+        return res.status(200).send(ordersData);
+    }catch(error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
 }
