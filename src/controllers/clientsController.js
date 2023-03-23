@@ -23,5 +23,20 @@ export async function postClients(req, res){
 }
 
 export async function getClientsOrder(req, res){
+    const {id} = req.params;
 
+    try {
+        const clientsById = await db.query(`SELECT * FROM clients WHERE "clientId" = $1`, [id]);
+
+        if(!clientsById.rows[0]) return res.status(404).send("Usuário inexistente");
+
+        const ordersByClientId = await db.query(`SELECT * FROM orders WHERE "clientId" = $1`, [id]);
+
+        if(!ordersByClientId.rows[0]) return res.status(404).send("Sem pedidos até o momento!");
+
+        res.send(ordersByClientId.rows);
+    }catch(error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
 }
