@@ -73,7 +73,7 @@ export async function getOrdersById(req, res){
     try {
         const orderById = await selectOrders(id);
 
-        if(!ordersById.rows[0]) return res.sendStatus(404);
+        if(!orderById.rows[0]) return res.sendStatus(404);
 
         const clientOrderId = await selectClient(orderById);
         const cakeOrderId = await selectCake(orderById);
