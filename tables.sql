@@ -172,6 +172,11 @@ INSERT INTO public.clients VALUES (11, 'teste7', 'Rua tal', '7199999999');
 --
 
 INSERT INTO public.orders VALUES (1, 1, 1, 2, '2023-03-24 00:00:00', 26);
+INSERT INTO public.orders VALUES (2, 1, 1, 2, '2023-03-24 00:00:00', 26);
+INSERT INTO public.orders VALUES (3, 2, 1, 2, '2023-03-24 00:00:00', 26);
+INSERT INTO public.orders VALUES (4, 3, 1, 2, '2023-03-24 00:00:00', 26);
+INSERT INTO public.orders VALUES (5, 5, 1, 2, '2023-03-24 00:00:00', 26);
+INSERT INTO public.orders VALUES (6, 6, 1, 2, '2023-03-24 00:00:00', 26);
 
 
 --
@@ -192,7 +197,7 @@ SELECT pg_catalog.setval('public.clients_id_seq', 11, true);
 -- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.orders_id_seq', 1, true);
+SELECT pg_catalog.setval('public.orders_id_seq', 6, true);
 
 
 --
