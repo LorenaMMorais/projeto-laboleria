@@ -1,22 +1,14 @@
-import db from "../db.js";
 import dayjs from "dayjs";
-import ordersSchema from "../schemas/ordersSchema.js";
+import { selectClientsById, selectCakesById, insertOrders, ordersJoin, selectOrders, selectClient, selectCake } from "../repositories/ordersRepository.js";
 
 export async function postOrder(req, res){
     const { clientId, cakeId, quantity } = req.body;
-/*     const validation = ordersSchema.validate({ clientId, cakeId, quantity }, { abortEarly: false });
 
-    if(validation.error){
-        const erro = validation.error.details.map((d) => d.message)
-        res.status(422).send(erro);
-        return
-    } */
-
-    const clientExist = await db.query(`SELECT * FROM clients WHERE id = $1;`, [clientId]);
+    const clientExist = await selectClientsById(clientId);
 
     if(!clientExist.rows[0]) return res.sendStatus(404);
 
-    const cakeExist = await db.query(`SELECT * FROM cakes WHERE id = $1;`, [cakeId]);
+    const cakeExist = await selectCakesById(cakeId);
 
     if(!cakeExist.rows[0]) return res.sendStatus(404);
 
@@ -26,8 +18,8 @@ export async function postOrder(req, res){
     const createdAt = dayjs().format('YYYY-MM-DD');
 
     try {
-        await db.query(`INSERT INTO orders ("clientId", "cakeId", "quantity", "totalPrice", "createdAt") VALUES ($1, $2, $3, $4, $5);`, [clientId, cakeId, quantity, totalPrice, createdAt]);
-    
+        await insertOrders(clientId, cakeId, quantity, totalPrice, createdAt);
+            
         res.sendStatus(201);
     }catch(error) {
         console.log(error);
@@ -37,11 +29,38 @@ export async function postOrder(req, res){
 
 export async function getOrders(req, res){
     try {
-        const allOrders = await db.query(`SELECT * FROM orders;`);
+        const completeOrders = await ordersJoin();
 
-        if(!allOrders.rows[0]) return res.status(400).send([]);
+        const allCompleteOrders = completeOrders.rows.map((element) => {
 
-        return res.status(200).send(allOrders.rows);
+            const completeOrdersData = {
+                client: {
+                    id: element.clientId,
+                    name: element.clientName,
+                    address: element.address,
+                    phone: element.phone,
+                  },
+                  cake: {
+                    id: element.cakeId,
+                    name: element.cakes,
+                    price: element.price,
+                    description: element.description,
+                    image: element.image,
+                  },
+                  orderId: element.ordersId,
+                  createdAt: element.createdAt,
+                  quantity: element.quantity,
+                  totalPrice: element.totalPrice,
+            }
+
+            return completeOrdersData;
+        });
+
+        if(!completeOrders.rows[0]){
+            return res.status(404).send([])
+        }
+
+        res.status(200).send(allCompleteOrders);
     }catch(error) {
         console.log(error);
         res.sendStatus(500);
@@ -52,13 +71,12 @@ export async function getOrdersById(req, res){
     const { id } = req.params;
     
     try {
-        const ordersById = await db.query(`SELECT * FROM orders WHERE id = $1;`, [Id]);
+        const orderById = await selectOrders(id);
 
         if(!ordersById.rows[0]) return res.sendStatus(404);
 
-        const clientOrderId = await db.query(`SELECT * FROM clients WHERE id = $1;`, [ordersById.rows[0].clientId]);
-    
-        const cakeOrderId = await db.query(`SELECT * FROM cakes WHERE id = $1;`, [ordersById.rows[0].cakeId]);
+        const clientOrderId = await selectClient(orderById);
+        const cakeOrderId = await selectCake(orderById);
 
         const ordersData = {
             client:{

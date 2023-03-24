@@ -164,6 +164,7 @@ INSERT INTO public.clients VALUES (7, 'teste6', 'Rua tal', '4399999999');
 INSERT INTO public.clients VALUES (8, 'teste2', 'Rua tal', '1399999999');
 INSERT INTO public.clients VALUES (9, 'teste3', 'Rua tal', '2399999999');
 INSERT INTO public.clients VALUES (10, 'teste4', 'Rua tal', '3399999999');
+INSERT INTO public.clients VALUES (11, 'teste7', 'Rua tal', '7199999999');
 
 
 --
@@ -184,7 +185,7 @@ SELECT pg_catalog.setval('public.cakes_id_seq', 10, true);
 -- Name: clients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.clients_id_seq', 10, true);
+SELECT pg_catalog.setval('public.clients_id_seq', 11, true);
 
 
 --
