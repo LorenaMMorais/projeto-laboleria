@@ -3,13 +3,13 @@ import clientsSchema from "../schemas/clientsSchema.js";
 
 export async function postClients(req, res){
     const { name, address, phone } = req.body;
-    const validation = clientsSchema.validate({ name, address, phone }, { abortEarly: false });
+/*     const validation = clientsSchema.validate({ name, address, phone }, { abortEarly: false });
 
     if(validation.error){
         const erro = validation.error.details.map((d) => d.message);
         res.status(422).send(erro);
         return
-    }
+    } */
 
     if(!name || !address || !phone) return res.sendStatus(400);
 

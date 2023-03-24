@@ -1,7 +1,10 @@
 import joi from "joi";
 
 const ordersSchema = joi.object({
-    price: joi.number().required()
+    clientId: joi.number().required(),
+    cakeId: joi.number().required(),
+    quantity: joi.number().required().min(1).max(5),
+    totalPrice: joi.number().required()
 });
 
 export default ordersSchema;

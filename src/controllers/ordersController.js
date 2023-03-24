@@ -4,13 +4,13 @@ import ordersSchema from "../schemas/ordersSchema.js";
 
 export async function postOrder(req, res){
     const { clientId, cakeId, quantity } = req.body;
-    const validation = ordersSchema.validate({ clientId, cakeId, quantity }, { abortEarly: false });
+/*     const validation = ordersSchema.validate({ clientId, cakeId, quantity }, { abortEarly: false });
 
     if(validation.error){
         const erro = validation.error.details.map((d) => d.message)
         res.status(422).send(erro);
         return
-    }
+    } */
 
     const clientExist = await db.query(`SELECT * FROM clients WHERE id = $1;`, [clientId]);
 

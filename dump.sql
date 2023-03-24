@@ -144,39 +144,54 @@ ALTER TABLE ONLY public.orders ALTER COLUMN id SET DEFAULT nextval('public.order
 -- Data for Name: cakes; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.cakes VALUES (1, 'Bolo de pote', 13, 'encurtador.com.br/iDIX0dsfsdf', 'Bolo de chocolate com recheio de leite ninho');
+INSERT INTO public.cakes VALUES (5, 'Bolo de pote 1', 13, 'encurtador.com.br/iDIX0dsfsdfs', 'Bolo de chocolate com recheio de leite ninhosdfsdf');
+INSERT INTO public.cakes VALUES (6, 'Bolo de pote', 13, 'encurtador.com.br/iDIX0', 'Bolo de chocolate com recheio de leite ');
+INSERT INTO public.cakes VALUES (9, 'Bolo de potsde', 13, 'encurtador.com.br/iDIX0dsd', 'Bolo de chdsdocolate com recheio de leite ');
+INSERT INTO public.cakes VALUES (10, 'Bolo de potsddse', 13, 'encurtador.com.br/iDIdsX0dsd', 'Bolods de chdsdocolate com recheio de leite ');
 
 
 --
 -- Data for Name: clients; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.clients VALUES (1, 'Fulana', 'Rua tal', '2199999999');
+INSERT INTO public.clients VALUES (2, 'lorena', 'Rua Brasil', '44998164003');
+INSERT INTO public.clients VALUES (3, 'teste', 'teste', '12345678910');
+INSERT INTO public.clients VALUES (5, 'teste1', 'teste1', '12345678911');
+INSERT INTO public.clients VALUES (6, 'teste5', 'Rua tal', '4499999999');
+INSERT INTO public.clients VALUES (7, 'teste6', 'Rua tal', '4399999999');
+INSERT INTO public.clients VALUES (8, 'teste2', 'Rua tal', '1399999999');
+INSERT INTO public.clients VALUES (9, 'teste3', 'Rua tal', '2399999999');
+INSERT INTO public.clients VALUES (10, 'teste4', 'Rua tal', '3399999999');
 
 
 --
 -- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.orders VALUES (1, 1, 1, 2, '2023-03-24 00:00:00', 26);
 
 
 --
 -- Name: cakes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.cakes_id_seq', 1, false);
+SELECT pg_catalog.setval('public.cakes_id_seq', 10, true);
 
 
 --
 -- Name: clients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.clients_id_seq', 1, false);
+SELECT pg_catalog.setval('public.clients_id_seq', 10, true);
 
 
 --
 -- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.orders_id_seq', 1, false);
+SELECT pg_catalog.setval('public.orders_id_seq', 1, true);
 
 
 --
